@@ -1,0 +1,8 @@
+2018-09-06T00:36:43+00:00 CRITICAL String size overflow
+
+2018-09-06T00:37:37+00:00 CRITICAL String size overflow
+
+2018-09-06T00:37:42+00:00 CRITICAL String size overflow
+
+2018-09-06T18:56:26+00:00 CRITICAL Call to undefined function plugin_url()
+

@@ -14,7 +14,7 @@ jQuery(document).ready(function($){
 		_image.onload = function() {
 			var _pattern = _draw.createPattern(_image, 'repeat');
 			_draw.fillStyle = _pattern;
-			_draw.fillRect(0, 0, _width, _height);
+			_draw.fillRect(size, size, _width-(size*2), _height-(size*2));
 		}
 		_temp_background = src;
 	}

@@ -4,7 +4,7 @@ jQuery(document).ready(function($){
 	var _width = _canvas.width = $("html").width() * 0.6;
 	var _height = _canvas.height = _width * 0.6;
 	var _temp_border, _temp_background = '';
-	var _scale = 1 , zoom_step = 0.05;
+	var _scale = 0.6 , zoom_step = 0.05;
 	var _size_boder = 20;
 	
 	function change_background(src, size, canvas){

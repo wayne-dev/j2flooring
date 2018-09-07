@@ -55,4 +55,18 @@ function property_post_type() {
 
 }
 add_action( 'init', 'property_post_type', 0 );
+add_filter('manage_posts_columns', 'posts_columns', 0);
+add_action('manage_posts_custom_column', 'posts_custom_columns', 0, 2);
+function posts_columns($defaults){
+    $defaults['1_thumbs'] = __('Thumbs');
+    return $defaults;
+}
+function posts_custom_columns($column_name, $id){ 
+	if($column_name === '1_thumbs'){ 
+		$meta_value = get_post_meta( $id, "_pattern_id", true );
+		$src = wp_get_attachment_image_src( $meta_value, 'full' );
+		//echo the_post_thumbnail( 'featured-thumbnail' );
+		echo '<img src="'.$src[0].'" alt="" width = 70  />';
+	} 
+}
 ?>

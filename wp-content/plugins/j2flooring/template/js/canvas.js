@@ -26,33 +26,37 @@ jQuery(document).ready(function($){
 			var _pattern = _draw.createPattern(_image, 'repeat');
 			_draw.fillStyle = _pattern;
 			//top
-			/*_draw.beginPath();
+			_draw.beginPath();
 			_draw.moveTo(0, 0);
-			_draw.lineTo((_width/2), (_height/2));
+			_draw.lineTo( size, size);
+			_draw.lineTo(_width-size, size);
 			_draw.lineTo(_width, 0);
-			_draw.fill();*/
-			_draw.fillRect(0, 0, _width, size);
+			_draw.fill();
+			//_draw.fillRect(0, 0, _width, size);
 			//bottom
-			/*_draw.beginPath();
+			_draw.beginPath();
 			_draw.moveTo(0, _height);
-			_draw.lineTo((_width/2), (_height/2));
+			_draw.lineTo(size, _height-size);
+			_draw.lineTo(_width-size, _height-size);
 			_draw.lineTo(_width, _height);
-			_draw.fill();*/
-			_draw.fillRect(0, _height-size, _width, size);
+			_draw.fill();
+			//_draw.fillRect(0, _height-size, _width, size);
 			//left
-			/*_draw.beginPath();
+			_draw.beginPath();
 			_draw.moveTo(0, 0);
-			_draw.lineTo((_width/2), (_height/2));
+			_draw.lineTo( size, size);
+			_draw.lineTo( size, _height-size);
 			_draw.lineTo(0, _height);
-			_draw.fill();*/
-			_draw.fillRect(0, 0, size, _height);
+			_draw.fill();
+			//_draw.fillRect(0, 0, size, _height);
 			//right
-			/*_draw.beginPath();
-			_draw.moveTo((_width/2), (_height/2));
-			_draw.lineTo(_width, 0);
+			_draw.beginPath();
+			_draw.moveTo(_width, 0);
+			_draw.lineTo( _width-size, size);
+			_draw.lineTo( _width-size, _height-size);
 			_draw.lineTo(_width, _height);
-			_draw.fill();*/
-			_draw.fillRect(_width-size, 0, size, _height);
+			_draw.fill();
+			//_draw.fillRect(_width-size, 0, size, _height);
 		}
 		_temp_border = src;
 	}

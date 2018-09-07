@@ -1,12 +1,15 @@
 jQuery(document).ready(function($){
 	var _canvas = document.createElement('canvas');
 	_canvas.id     = "canvas";
-	var _width = _canvas.width = $("html").width() * 0.6;
-	var _height = _canvas.height = _width * 0.6;
+	var _width = _canvas.width = parseInt($("html").width() * 0.6);
+	var _height = _canvas.height = parseInt(_width * 0.6);
 	var _temp_border, _temp_background = '';
 	var _scale = 0.6 , zoom_step = 0.05;
 	var _size_boder = 20;
 	
+	$('#parent_menu_size input[name="width"]').val(_width);
+	$('#parent_menu_size input[name="height"]').val(_height);
+
 	function change_background(src, size, canvas){
 		var _image = new Image();
 		_image.src = src;
@@ -14,7 +17,7 @@ jQuery(document).ready(function($){
 		_image.onload = function() {
 			var _pattern = _draw.createPattern(_image, 'repeat');
 			_draw.fillStyle = _pattern;
-			_draw.fillRect(0, 0, _width, _height);
+			_draw.fillRect(size, size, _width-(size*2), _height-(size*2));
 		}
 		_temp_background = src;
 	}
@@ -26,33 +29,37 @@ jQuery(document).ready(function($){
 			var _pattern = _draw.createPattern(_image, 'repeat');
 			_draw.fillStyle = _pattern;
 			//top
-			/*_draw.beginPath();
+			_draw.beginPath();
 			_draw.moveTo(0, 0);
-			_draw.lineTo((_width/2), (_height/2));
+			_draw.lineTo( size, size);
+			_draw.lineTo(_width-size, size);
 			_draw.lineTo(_width, 0);
-			_draw.fill();*/
-			_draw.fillRect(0, 0, _width, size);
+			_draw.fill();
+			//_draw.fillRect(0, 0, _width, size);
 			//bottom
-			/*_draw.beginPath();
+			_draw.beginPath();
 			_draw.moveTo(0, _height);
-			_draw.lineTo((_width/2), (_height/2));
+			_draw.lineTo(size, _height-size);
+			_draw.lineTo(_width-size, _height-size);
 			_draw.lineTo(_width, _height);
-			_draw.fill();*/
-			_draw.fillRect(0, _height-size, _width, size);
+			_draw.fill();
+			//_draw.fillRect(0, _height-size, _width, size);
 			//left
-			/*_draw.beginPath();
+			_draw.beginPath();
 			_draw.moveTo(0, 0);
-			_draw.lineTo((_width/2), (_height/2));
+			_draw.lineTo( size, size);
+			_draw.lineTo( size, _height-size);
 			_draw.lineTo(0, _height);
-			_draw.fill();*/
-			_draw.fillRect(0, 0, size, _height);
+			_draw.fill();
+			//_draw.fillRect(0, 0, size, _height);
 			//right
-			/*_draw.beginPath();
-			_draw.moveTo((_width/2), (_height/2));
-			_draw.lineTo(_width, 0);
+			_draw.beginPath();
+			_draw.moveTo(_width, 0);
+			_draw.lineTo( _width-size, size);
+			_draw.lineTo( _width-size, _height-size);
 			_draw.lineTo(_width, _height);
-			_draw.fill();*/
-			_draw.fillRect(_width-size, 0, size, _height);
+			_draw.fill();
+			//_draw.fillRect(_width-size, 0, size, _height);
 		}
 		_temp_border = src;
 	}
@@ -62,7 +69,7 @@ jQuery(document).ready(function($){
 		scale_img();
 	}
 	function scale_img(){
-		$('#images_canvas canvas').css({'height': _height*_scale+'px' , 'width': _width*_scale+'px'})
+		$('#images_canvas canvas').css({'height': _height*_scale+'px' , 'width': _width*_scale+'px'});
 	}
 	$('.canvas-background').click(function(){
 		var $src = $(this).attr('data-pattern');
@@ -90,22 +97,6 @@ jQuery(document).ready(function($){
 		_scale = parseFloat(_scale) - zoom_step;
 		scale_img();
 	});
-	$('button.button-zoom').click(function(){
-		if($(this).hasClass('zoom-in')){
-			_scale = parseFloat(_scale) + 0.01;
-			if( _scale > 1){
-				_scale = 1;
-			}
-		}
-		
-		if($(this).hasClass('zoom-out')) {
-			_scale = parseFloat(_scale) - 0.01;
-			if( _scale < 0.1){
-				_scale = 0.1;
-			}
-		}
-		scale_img();
-	});
 	$(document).on("click",".select_image_wapper ul li a",function(e){
 		$(".select_image_wapper ul li a").removeClass("active");
 		$(this).addClass("active");
@@ -126,4 +117,35 @@ jQuery(document).ready(function($){
 		change_border($src, _size_boder, _canvas);
 		add_canvas();
 	});
+	$(document).on('change', '#parent_menu_size input', function(e){
+		change_size($(this));
+	});
+	$(document).on('click', '#parent_menu_size a.apply-size', function(e){
+		change_size($(this));
+	});
+
+	function change_size(element){
+		var $_parent = element.closest('#parent_menu_size');
+		var $_height = $_parent.find('[name="height"]').val();
+		var $_width = $_parent.find('[name="width"]').val();
+		//_width = _canvas.width = parseInt($_width);
+		//_height = _canvas.height = parseInt($_height);
+		_height = _canvas.height = parseInt(_width * ($_height/$_width));
+		console.log(_width+'||'+_height+'||'+($_height/$_width));
+		_scale = 1;
+		if(_temp_background){
+			change_background(_temp_background, _size_boder, _canvas);
+		}
+		if(_temp_border){
+			change_border(_temp_border, _size_boder, _canvas);
+		}
+		add_canvas();
+	}
 });
+
+function isNumberKey(evt){
+	var charCode = (evt.which) ? evt.which : event.keyCode
+	if (charCode > 31 && (charCode < 48 || charCode > 57))
+		return false;
+	return true;
+}

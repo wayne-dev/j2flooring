@@ -1,7 +1,7 @@
 jQuery(document).ready(function($){
 	var _canvas = document.createElement('canvas');
 	_canvas.id     = "canvas";
-	var _width = _canvas.width = $("html").width() * 0.6;
+	var _width = _canvas.width = 1200; //$("html").width() * 0.6;
 	var _height = _canvas.height = _width * 0.6;
 	var _temp_border, _temp_background = '';
 	var _scale = 1 , zoom_step = 0.05;
@@ -66,7 +66,12 @@ jQuery(document).ready(function($){
 		scale_img();
 	}
 	function scale_img(){
-		$('#images_canvas canvas').css({'height': _height*_scale+'px' , 'width': _width*_scale+'px'})
+		if(_scale == 1){
+			var _width_canvas = $("html").width() * 0.6;
+			$('#images_canvas canvas').css({'height': _width_canvas*0.6+'px' , 'width': _width_canvas+'px'});
+		} else {
+			$('#images_canvas canvas').css({'height': _height*_scale+'px' , 'width': _width*_scale+'px'});
+		}
 	}
 	$('.canvas-background').click(function(){
 		var $src = $(this).attr('data-pattern');
@@ -92,22 +97,6 @@ jQuery(document).ready(function($){
 	$('a#zoom_out').click(function(e){
 		e.preventDefault();
 		_scale = parseFloat(_scale) - zoom_step;
-		scale_img();
-	});
-	$('button.button-zoom').click(function(){
-		if($(this).hasClass('zoom-in')){
-			_scale = parseFloat(_scale) + 0.01;
-			if( _scale > 1){
-				_scale = 1;
-			}
-		}
-		
-		if($(this).hasClass('zoom-out')) {
-			_scale = parseFloat(_scale) - 0.01;
-			if( _scale < 0.1){
-				_scale = 0.1;
-			}
-		}
 		scale_img();
 	});
 	$(document).on("click",".select_image_wapper ul li a",function(e){

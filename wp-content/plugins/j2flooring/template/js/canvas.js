@@ -4,7 +4,7 @@ jQuery(document).ready(function($){
 	var _width = _canvas.width = parseInt($("html").width() * 0.6);
 	var _height = _canvas.height = parseInt(_width * 0.6);
 	var _temp_border, _temp_background = '';
-	var _scale = 1 , zoom_step = 0.05, first_load = true;
+	var _scale = 1 , zoom_step = 0.05;
 	var _size_boder = 20;
 	
 	$('#parent_menu_size input[name="width"]').val(_width);
@@ -121,9 +121,10 @@ jQuery(document).ready(function($){
 		var $_parent = $(this).closest('#parent_menu_size');
 		var $_height = $_parent.find('[name="height"]').val();
 		var $_width = $_parent.find('[name="width"]').val();
-		_width = _canvas.width = parseInt($_width);
-		_height = _canvas.height = parseInt($_height);
-		console.log(_width+'||'+_height);
+		//_width = _canvas.width = parseInt($_width);
+		//_height = _canvas.height = parseInt($_height);
+		_height = _canvas.height = parseInt(_width * ($_height/$_width));
+		console.log(_width+'||'+_height+'||'+($_height/$_width));
 		_scale = 1;
 		if(_temp_background){
 			change_background(_temp_background, _size_boder, _canvas);
@@ -141,14 +142,3 @@ function isNumberKey(evt){
 		return false;
 	return true;
 }
-
-function createValidator(element) {
-	var min = parseInt(element.getAttribute("min")) || 0;
-	var max = parseInt(element.getAttribute("max")) || 0;
-
-	var value = parseInt(element.value) || min;
-	element.value = value;
-
-	if (value < min) element.value = min;
-	if (value > max) element.value = max;
-};

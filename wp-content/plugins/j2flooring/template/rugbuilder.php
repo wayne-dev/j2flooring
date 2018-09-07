@@ -77,8 +77,8 @@ $logo_url = wp_get_attachment_image_src( 84, 'full' )[0];
 					<?php } ?>
 				<div class = 'sub_menu_rug menu_rug_style' id = 'parent_menu_size'>
 					<ul class = ''>
-						<li><span>Length (cm): </span><input type="text" class="form-control size-height" max="1000" min="0" name="height" value="" onkeypress="return isNumberKey(event)" onkeyup="createValidator(this)"/></li>
-						<li><span>Witdh (cm): </span><input type="text" class="form-control size-width" max="1000" min="0" name="width" value="" onkeypress="return isNumberKey(event)" onkeyup="createValidator(this)"/></li
+						<li><span>Length (cm): </span><input type="text" class="form-control size-height" max="1000" min="0" name="height" value="" onkeypress="return isNumberKey(event)" /></li>
+						<li><span>Witdh (cm): </span><input type="text" class="form-control size-width" max="1000" min="0" name="width" value="" onkeypress="return isNumberKey(event)"/></li
 					></ul>
 						<a href="javascript:void(0);" class="apply-size">Apply</a>
 				</div>

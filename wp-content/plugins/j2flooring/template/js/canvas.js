@@ -1,12 +1,15 @@
 jQuery(document).ready(function($){
 	var _canvas = document.createElement('canvas');
 	_canvas.id     = "canvas";
-	var _width = _canvas.width = 1200; //$("html").width() * 0.6;
-	var _height = _canvas.height = _width * 0.6;
+	var _width = _canvas.width = parseInt($("html").width() * 0.6);
+	var _height = _canvas.height = parseInt(_width * 0.6);
 	var _temp_border, _temp_background = '';
-	var _scale = 1 , zoom_step = 0.05;
+	var _scale = 1 , zoom_step = 0.05, first_load = true;
 	var _size_boder = 20;
 	
+	$('#parent_menu_size input[name="width"]').val(_width);
+	$('#parent_menu_size input[name="height"]').val(_height);
+
 	function change_background(src, size, canvas){
 		var _image = new Image();
 		_image.src = src;
@@ -66,12 +69,7 @@ jQuery(document).ready(function($){
 		scale_img();
 	}
 	function scale_img(){
-		if(_scale == 1){
-			var _width_canvas = $("html").width() * 0.6;
-			$('#images_canvas canvas').css({'height': _width_canvas*0.6+'px' , 'width': _width_canvas+'px'});
-		} else {
-			$('#images_canvas canvas').css({'height': _height*_scale+'px' , 'width': _width*_scale+'px'});
-		}
+		$('#images_canvas canvas').css({'height': _height*_scale+'px' , 'width': _width*_scale+'px'});
 	}
 	$('.canvas-background').click(function(){
 		var $src = $(this).attr('data-pattern');
@@ -119,4 +117,38 @@ jQuery(document).ready(function($){
 		change_border($src, _size_boder, _canvas);
 		add_canvas();
 	});
+	$(document).on('click', '#parent_menu_size a.apply-size', function(e){
+		var $_parent = $(this).closest('#parent_menu_size');
+		var $_height = $_parent.find('[name="height"]').val();
+		var $_width = $_parent.find('[name="width"]').val();
+		_width = _canvas.width = parseInt($_width);
+		_height = _canvas.height = parseInt($_height);
+		console.log(_width+'||'+_height);
+		_scale = 1;
+		if(_temp_background){
+			change_background(_temp_background, _size_boder, _canvas);
+		}
+		if(_temp_border){
+			change_border(_temp_border, _size_boder, _canvas);
+		}
+		add_canvas();
+	});
 });
+
+function isNumberKey(evt){
+	var charCode = (evt.which) ? evt.which : event.keyCode
+	if (charCode > 31 && (charCode < 48 || charCode > 57))
+		return false;
+	return true;
+}
+
+function createValidator(element) {
+	var min = parseInt(element.getAttribute("min")) || 0;
+	var max = parseInt(element.getAttribute("max")) || 0;
+
+	var value = parseInt(element.value) || min;
+	element.value = value;
+
+	if (value < min) element.value = min;
+	if (value > max) element.value = max;
+};

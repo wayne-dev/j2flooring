@@ -117,8 +117,15 @@ jQuery(document).ready(function($){
 		change_border($src, _size_boder, _canvas);
 		add_canvas();
 	});
+	$(document).on('change', '#parent_menu_size input', function(e){
+		change_size($(this));
+	});
 	$(document).on('click', '#parent_menu_size a.apply-size', function(e){
-		var $_parent = $(this).closest('#parent_menu_size');
+		change_size($(this));
+	});
+
+	function change_size(element){
+		var $_parent = element.closest('#parent_menu_size');
 		var $_height = $_parent.find('[name="height"]').val();
 		var $_width = $_parent.find('[name="width"]').val();
 		//_width = _canvas.width = parseInt($_width);
@@ -133,7 +140,7 @@ jQuery(document).ready(function($){
 			change_border(_temp_border, _size_boder, _canvas);
 		}
 		add_canvas();
-	});
+	}
 });
 
 function isNumberKey(evt){

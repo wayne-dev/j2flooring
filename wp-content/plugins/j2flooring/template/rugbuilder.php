@@ -77,8 +77,8 @@ $logo_url = wp_get_attachment_image_src( 84, 'full' )[0];
 					<?php } ?>
 				<div class = 'sub_menu_rug menu_rug_style' id = 'parent_menu_size'>
 					<ul class = ''>
-						<li><span>Length (cm): </span><input type="text" class="form-control size-height" max="1000" min="0" name="height" value="" onkeypress="return isNumberKey(event)" /></li>
-						<li><span>Witdh (cm): </span><input type="text" class="form-control size-width" max="1000" min="0" name="width" value="" onkeypress="return isNumberKey(event)"/></li
+						<li><span>Height (cm): </span><input type="number" class="form-control size-height" max="1000" min="0" step="any" name="height" value=""  /></li>
+						<li><span>Witdh (cm): </span><input type="number" class="form-control size-width" max="1000" min="0" step="any" name="width" value="" /></li
 					></ul>
 						<a href="javascript:void(0);" class="apply-size">Apply</a>
 				</div>
@@ -87,6 +87,9 @@ $logo_url = wp_get_attachment_image_src( 84, 'full' )[0];
 			</div>
 		</div>
 		<div class="review_main">
+			<div class="arrow_canvas">
+				<canvas id = 'arrow_canvas'></canvas>
+			</div>
 			<div id="images_canvas" class="dragscroll"></div>
 			<div id = 'canvas_control' >
 				<a id = "zoom_in">+</a>

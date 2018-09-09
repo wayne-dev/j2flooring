@@ -47,5 +47,9 @@ jQuery(function($){
 	$(document).on('click','#rugbuilder a',function(e){
 		e.preventDefault();
 	});
+	$(document).on("click",".select_image_wapper ul li a",function(e){
+		$(".select_image_wapper ul li a").removeClass("active");
+		$(this).addClass("active");
+	});
 	
 });

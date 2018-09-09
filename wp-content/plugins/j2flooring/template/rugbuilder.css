@@ -154,6 +154,19 @@ div#loading_img {
 }
 div#images_canvas {
     text-align: center;
+    position: absolute;
+    width: 100%;
+}
+.arrow_canvas {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+div#images_canvas canvas {
+    /* top: 40px; */
+    /* position: relative; */
+    /* left: 20px; */
 }
 div#canvas_control {
     position: absolute;

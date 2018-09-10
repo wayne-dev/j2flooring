@@ -110,10 +110,12 @@
 			//$(_this).html(_canvas);
 		}
 		$(document).on("click",".select_image_wapper#select_center .menu_rug_style ul li a",function(e){
+			global_var.rugbuilder.background = $(this).data('pattern_id');;
 			var $src = $(this).find('img').attr("src");
 			set_background($src);
 		});
 		$(document).on("click",".select_image_wapper#select_border .menu_rug_style ul li a",function(e){
+			global_var.rugbuilder.border = $(this).data('pattern_id');
 			var $src = $(this).find('img').attr("src");
 			set_border($src);
 		});

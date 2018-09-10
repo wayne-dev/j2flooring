@@ -17,7 +17,8 @@
 </head>
 <body id = "rugbuilder">
 <?php
-$logo_url = wp_get_attachment_image_src( 84, 'full' )[0];
+		$img = wp_get_attachment_image_src( 84, 'thumbnail' ) ;
+		$logo_url =$img[0];
 ?>
 	<div class="container">
 		<div id = 'header_rugbuilder'>
@@ -60,7 +61,7 @@ $logo_url = wp_get_attachment_image_src( 84, 'full' )[0];
 						) );
 					
 					?>
-				<div class = 'sub_menu_rug menu_rug_style' id = 'parent_<?php echo $parent_id ; ?>'>
+				<div class = 'sub_menu_rug menu_rug_style cat_<?php echo get_term($parent_id)->slug ; ?>' id = 'parent_<?php echo $parent_id ; ?>'>
 					<ul class = ''>
 						<?php foreach($children as $child){ 
 							$term_id = $child->term_id ;
@@ -87,6 +88,8 @@ $logo_url = wp_get_attachment_image_src( 84, 'full' )[0];
 			</div>
 		</div>
 		<div class="review_main">
+			<div id="calculation_result">
+			</div>
 			<div class="arrow_canvas">
 				<canvas id = 'arrow_canvas'></canvas>
 			</div>

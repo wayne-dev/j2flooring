@@ -19,18 +19,27 @@ if ( ! defined( 'SD_PLUGIN_PATH' ) ) {
 }
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	function rugbuilder_scripts(){
-	wp_register_script('rugbuilder',plugin_dir_url(__FILE__) .'/template/rugbuilder.js',array( 'jquery' ));
-	wp_register_script('canvas',plugin_dir_url(__FILE__) .'/template/js/canvas.js',array( 'jquery' ));
-	wp_register_script('rugbuilder-scrollbar',plugin_dir_url(__FILE__) .'/template/js/jquery.scrollbar.js',array( 'jquery' ));
-    wp_enqueue_script( 'rugbuilder' );
-    wp_enqueue_script( 'canvas' );
-    wp_enqueue_script( 'rugbuilder-scrollbar' );
-	
-	$global_var = array( 
-		"ajax_url" => admin_url( 'admin-ajax.php' ),
-		"loading_img" => plugin_dir_url(__FILE__) . "/assets/img/ajax-loader.gif"
-	);
-	wp_localize_script('rugbuilder','global_var',$global_var);
+		    if ( get_query_var( 'rugbuilder' ) ) {
+
+				wp_register_script('rugbuilder',plugin_dir_url(__FILE__) .'/template/rugbuilder.js',array( 'jquery' ));
+				wp_register_script('canvas',plugin_dir_url(__FILE__) .'/template/js/canvas.js',array( 'jquery' ));
+				wp_register_script('rugbuilder-scrollbar',plugin_dir_url(__FILE__) .'/template/js/jquery.scrollbar.js',array( 'jquery' ));
+				wp_enqueue_script( 'rugbuilder' );
+				wp_enqueue_script( 'canvas' );
+				wp_enqueue_script( 'rugbuilder-scrollbar' );
+				
+				$global_var = array( 
+					"rugbuilder" => array(
+						'background' => '',
+						'border' => '',
+						'width' => '',
+						'height' => ''
+					),
+					"ajax_url" => admin_url( 'admin-ajax.php' ),
+					"loading_img" => plugin_dir_url(__FILE__) . "/assets/img/ajax-loader.gif"
+				);
+				wp_localize_script('rugbuilder','global_var',$global_var);
+				}
 	}
 	add_action( 'wp_enqueue_scripts', 'rugbuilder_scripts',0,100 );
 
@@ -38,7 +47,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	global $img_taxes;
 	$taxonomy_image = get_option("taxonomy_image_plugin");
 	foreach($taxonomy_image as $key => $img_id){
-		$img_taxes[$key] = wp_get_attachment_image_src( $img_id, 'thumbnail' )[0];
+		$img = wp_get_attachment_image_src( $img_id, 'thumbnail' ) ;
+		$img_taxes[$key] = $img[0];
 	}
 
 	require_once("radio-buttons-for-taxonomies/radio-buttons-for-taxonomies.php");
@@ -48,4 +58,5 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	require_once("inc/metaboxes.php");
 	require_once("inc/ajax.php");
 }  
+
 ?>

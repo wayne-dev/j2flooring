@@ -224,3 +224,38 @@ div#canvas_control > a {
 .calculate_form a:hover {
     background: #333;
 }
+div#calculation_result {
+    position: absolute;
+    left: 0;
+    top: -200px;
+    width: 100%;
+    text-align: center;
+}
+div#calculation_result_wapper {
+    padding: 10px;
+    background: #8f8f8f;
+    width: 220px;
+    margin: auto;
+    border-radius: 7px;
+    color: #fff;
+    line-height: 31px;
+}
+
+div#calculation_result_wapper a {
+    background: #303030;
+    text-align: center;
+    padding: 5px 10px;
+    float: right;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    line-height: 30px;
+}
+
+div#calculation_result_wapper a:hover {
+    background: #158fd0;
+}
+
+div#calculation_result_wapper span {
+    line-height: 40px;
+}

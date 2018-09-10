@@ -68,31 +68,36 @@
 				_draw.lineTo(_canvas.width-_size_boder - 40, _size_boder + 40);
 				_draw.lineTo(_canvas.width - 40, 40);
 				_draw.fill();
-				//_draw.fillRect(0, 0, _canvas.width, _size_boder);
-				//bottom
-				_draw.beginPath();
-				_draw.moveTo(40,  _canvas.height -40);
-				_draw.lineTo(_size_boder + 40, _canvas.height-_size_boder - 40);
-				_draw.lineTo(_canvas.width-_size_boder - 40, _canvas.height-_size_boder - 40);
-				_draw.lineTo(_canvas.width -40, _canvas.height -40);
-				_draw.fill();
-				//_draw.fillRect(0, _canvas.height-_size_boder, _canvas.width, _size_boder);
 				//left
+				_draw.rotate(90 * Math.PI / 180);
+				_draw.translate(0, -_canvas.width);
 				_draw.beginPath();
 				_draw.moveTo(40, 40);
-				_draw.lineTo( 40 + _size_boder, 40+ _size_boder);
-				_draw.lineTo( _size_boder + 40, _canvas.height-_size_boder - 40);
-				_draw.lineTo(40, _canvas.height - 40);
+				_draw.lineTo( 40 + _size_boder, 40 + _size_boder);
+				_draw.lineTo(_canvas.height-_size_boder - 40, _size_boder + 40);
+				_draw.lineTo(_canvas.height - 40, 40);
 				_draw.fill();
-				//_draw.fillRect(0, 0, _size_boder, _canvas.height);
-				//right
+				//bottom
+				_draw.rotate(90 * Math.PI / 180);
+				_draw.translate(0, -_canvas.height);
 				_draw.beginPath();
-				_draw.moveTo( _canvas.width - 40, 40);
-				_draw.lineTo( _canvas.width-_size_boder - 40, _size_boder + 40);
-				_draw.lineTo( _canvas.width-_size_boder - 40, _canvas.height-_size_boder -40);
-				_draw.lineTo(_canvas.width - 40, _canvas.height -40);
+				_draw.moveTo(40, 40);
+				_draw.lineTo( 40 + _size_boder, 40 + _size_boder);
+				_draw.lineTo(_canvas.width-_size_boder - 40, _size_boder + 40);
+				_draw.lineTo(_canvas.width - 40, 40);
 				_draw.fill();
-				//_draw.fillRect(_width-_size_boder, 0, _size_boder, _canvas.height);
+				//right
+				_draw.rotate(90 * Math.PI / 180);
+				_draw.translate(0, -_canvas.width);
+				_draw.beginPath();
+				_draw.moveTo(40, 40);
+				_draw.lineTo( 40 + _size_boder, 40 + _size_boder);
+				_draw.lineTo(_canvas.height-_size_boder - 40, _size_boder + 40);
+				_draw.lineTo(_canvas.height - 40, 40);
+				_draw.fill();
+				//reset _draw
+				_draw.rotate(90 * Math.PI / 180);
+				_draw.translate(0, -(_canvas.width + (_canvas.height - _canvas.width)));
 				_canvas.border = src ;
 			}
 			$(_this).html(_canvas);

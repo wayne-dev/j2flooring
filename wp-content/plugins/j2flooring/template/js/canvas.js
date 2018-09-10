@@ -8,8 +8,8 @@
 			
 			m_to_pix = 100; // 1m - 100px
 			square_rate = default_square_rate = 1;//square rate  = h / w
-			_max_width = $("html").width() + 40 ;
-			_max_height = $("html").width() * square_rate + 40;
+			_max_width = $("html").width()*0.8 + 40 ;
+			_max_height = $("html").width() * square_rate*0.8 + 40;
 			_size_boder = 20;//_size_boder 20 px
 			zoom_step	= 0.02;
 			_scale = 1;
@@ -129,8 +129,10 @@
 		}
 		$(document).on('change', '#parent_menu_size input', function(e){
 			var $_parent = $(this).closest('#parent_menu_size');
-			_canvas.height 	= ($_parent.find('[name="height"]').val() +  ft_m_to_pix(80)) ;
-			_canvas.width 	= ($_parent.find('[name="width"]').val() +  ft_m_to_pix(80)) ;
+			_canvas.height 	= (parseFloat($_parent.find('[name="height"]').val())*m_to_pix +  ft_m_to_pix(80)) ;
+			_canvas.width 	= (parseFloat($_parent.find('[name="width"]').val())*m_to_pix +  ft_m_to_pix(80)) ;
+			console.log(ft_m_to_pix(80));
+			console.log($_parent.find('[name="height"]').val());
 			square_rate = _canvas.height / _canvas.width ;
 			update_canvas();
 			fix_rate() ;
@@ -170,7 +172,6 @@
 			}
 		});
 		function scale_img(scale){
-			console.log(_canvas.height + '-' + _canvas.width);
 			$('#images_canvas canvas').css({'height':  _canvas.height*scale+'px' , 'width': _canvas.width*scale+'px'});
 			$('.arrow_canvas canvas').css({'height':  arrow_canvas.height*scale+'px' , 'width': arrow_canvas.width*scale+'px'});
 		}

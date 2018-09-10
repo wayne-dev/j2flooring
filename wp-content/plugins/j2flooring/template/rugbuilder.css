@@ -191,3 +191,36 @@ div#canvas_control > a {
     margin-bottom: 10px;
     cursor: pointer;
 }
+.calculate_form {
+    /* width: 200px; */
+    margin: auto;
+    padding: 20px 0;
+}
+.calculate_form b {
+    font-size: 15px;
+}
+
+.calculate_form input[type="number"] {
+    font-size: 15px;
+    padding: 5px;
+    text-align: center;
+    width: 120px;
+    margin: auto;
+}
+
+.calculate_form p {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+.calculate_form a {
+    padding: 10px;
+    background: #158fd0;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.calculate_form a:hover {
+    background: #333;
+}

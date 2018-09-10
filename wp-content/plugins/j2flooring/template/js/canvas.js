@@ -7,15 +7,16 @@
 		function init() {
 			
 			m_to_pix = 100; // 1m - 100px
-			square_rate = default_square_rate = 0.5;//square rate  = h / w
-			_max_width = $("html").width() - 40 ;
-			_max_height = $("html").width() * square_rate - 40;
+			square_rate = default_square_rate = 1;//square rate  = h / w
+			_max_width = $("html").width() + 40 ;
+			_max_height = $("html").width() * square_rate + 40;
 			_size_boder = 20;//_size_boder 20 px
 			zoom_step	= 0.02;
 			_scale = 1;
 			_canvas = document.createElement('canvas'),_canvas.id     = "canvas";
-			canvas_width 	= _canvas.width		=  _max_width * 0.6; // max canvas width = 0.6 screen (px)
-			canvas_height 	= _canvas.height	=  canvas_width * square_rate;
+			//canvas_width 	= _canvas.width		=  _max_width * 0.6; // max canvas width = 0.6 screen (px)
+			canvas_width 	= _canvas.width		=  500 + 80; // max canvas width = 0.6 screen (px)
+			canvas_height 	= _canvas.height	=  500 * square_rate + 80;
 			_canvas.background = '';
 			_canvas.border = '';
 			arrow_canvas = document.getElementById('arrow_canvas');
@@ -24,13 +25,16 @@
 			arrow_canvas.height		= _canvas.height;
 			//----------
 			
-			//_canvas_border= 'http://localhost/j2flooring.com/wp-content/uploads/2018/09/Wool1-150x150.jpg';
+			//_canvas.border= 'http://localhost/j2flooring.com/wp-content/uploads/2018/09/Wool1-150x150.jpg';
 			//set_background("https://findicons.com/files/icons/102/openphone/128/settings.png");
 			
-			$('#parent_menu_size input[name="width"]').val(_canvas.width);
-			$('#parent_menu_size input[name="height"]').val(_canvas.height);
+			$('#parent_menu_size input[name="width"]').val((_canvas.width  - ft_m_to_pix(80))/m_to_pix);
+			$('#parent_menu_size input[name="height"]').val((_canvas.height - ft_m_to_pix(80))/m_to_pix);
 			//draw_distance_info();
 			
+		}
+		function ft_m_to_pix (x){
+				return x * (m_to_pix/100) ;
 		}
 		function set_background(src){
 			var _image = new Image();
@@ -109,7 +113,7 @@
 			set_border($src);
 		});
 		function fix_rate(){
-			console.log(_canvas.height + '-' + _max_height);
+			//console.log(_canvas.height + '-' + _max_height);
 			//square_rate = h / w ;
 			var scale = 1;
 			if(_canvas.width > _max_width){
@@ -125,8 +129,8 @@
 		}
 		$(document).on('change', '#parent_menu_size input', function(e){
 			var $_parent = $(this).closest('#parent_menu_size');
-			_canvas.height = $_parent.find('[name="height"]').val();
-			_canvas.width 	= $_parent.find('[name="width"]').val();
+			_canvas.height 	= ($_parent.find('[name="height"]').val() +  ft_m_to_pix(80)) ;
+			_canvas.width 	= ($_parent.find('[name="width"]').val() +  ft_m_to_pix(80)) ;
 			square_rate = _canvas.height / _canvas.width ;
 			update_canvas();
 			fix_rate() ;
@@ -145,7 +149,7 @@
 			arrow_canvas.height		= _canvas.height;
 		}
 		function draw_distance_info(){
-			console.log(_canvas);
+			//console.log(_canvas);
 			draw_distance({x:45,y:25},{x:arrow_canvas.width-45,y:25});
 			draw_distance({x:25,y:45},{x:25,y:arrow_canvas.height-45});
 			draw_width_value(_canvas.width);
@@ -166,17 +170,20 @@
 			}
 		});
 		function scale_img(scale){
+			console.log(_canvas.height + '-' + _canvas.width);
 			$('#images_canvas canvas').css({'height':  _canvas.height*scale+'px' , 'width': _canvas.width*scale+'px'});
 			$('.arrow_canvas canvas').css({'height':  arrow_canvas.height*scale+'px' , 'width': arrow_canvas.width*scale+'px'});
 		}
 		
 		function draw_width_value(text){
+			text -= ft_m_to_pix(80);
 			text += " cm";
 			//var ctx = arrow_canvas.getContext("2d");
 			ct_arrow_canvas.font = "10px Open Sans";
-			ct_arrow_canvas.fillText(text,arrow_canvas.width / 2,20);
+			ct_arrow_canvas.fillText(text,(arrow_canvas.width / 2)-20,20);
 		}
 		function draw_height_value(text){
+			text -= ft_m_to_pix(80);
 			text += " cm";
 			//var ctx = arrow_canvas.getContext('2d');
 			ct_arrow_canvas.save();
@@ -184,7 +191,7 @@
 			ct_arrow_canvas.rotate(-Math.PI/2);
 			ct_arrow_canvas.font = "10px Open Sans";
 			ct_arrow_canvas.textAlign = "center";
-			ct_arrow_canvas.fillText(text, -0.5 * arrow_canvas.height , -5);
+			ct_arrow_canvas.fillText(text, (-0.5 * arrow_canvas.height ) +20, -5);
 			ct_arrow_canvas.restore();
 		}
 

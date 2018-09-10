@@ -76,11 +76,11 @@ $logo_url = wp_get_attachment_image_src( 84, 'full' )[0];
 				</div>
 					<?php } ?>
 				<div class = 'sub_menu_rug menu_rug_style' id = 'parent_menu_size'>
-					<ul class = ''>
-						<li><span>Height (cm): </span><input type="number" class="form-control size-height" max="1000" min="0" step="any" name="height" value=""  /></li>
-						<li><span>Witdh (cm): </span><input type="number" class="form-control size-width" max="1000" min="0" step="any" name="width" value="" /></li
-					></ul>
-						<a href="javascript:void(0);" class="apply-size">Apply</a>
+					<div class = 'calculate_form'>
+							<p><b>Height (m): </b><input type="number" class="form-control size-height" max="1000" min="0" step="0.1" name="height" value=""  /></p>
+							<p><b>Witdh (m): </b><input type="number" class="form-control size-width" max="1000" min="0" step="0.1" name="width" value="" /></p>
+							<p><a href="javascript:void(0);" class="apply-size">Calculate price</a>
+					</div>
 				</div>
 			</div>
 			<div class="subsub_menu_rug_wapper">

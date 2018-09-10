@@ -25,8 +25,8 @@
 			arrow_canvas.height		= _canvas.height;
 			//----------
 			
-			//_canvas.border= 'http://localhost/j2flooring.com/wp-content/uploads/2018/09/Wool1-150x150.jpg';
-			//set_background("https://findicons.com/files/icons/102/openphone/128/settings.png");
+			//_canvas.border= 'http://localhost/icon2.jpg';
+			//set_background("http://localhost/icon.png");
 			
 			$('#parent_menu_size input[name="width"]').val((_canvas.width  - ft_m_to_pix(80))/m_to_pix);
 			$('#parent_menu_size input[name="height"]').val((_canvas.height - ft_m_to_pix(80))/m_to_pix);
@@ -129,10 +129,9 @@
 		}
 		$(document).on('change', '#parent_menu_size input', function(e){
 			var $_parent = $(this).closest('#parent_menu_size');
-			_canvas.height 	= (parseFloat($_parent.find('[name="height"]').val())*m_to_pix +  ft_m_to_pix(80)) ;
-			_canvas.width 	= (parseFloat($_parent.find('[name="width"]').val())*m_to_pix +  ft_m_to_pix(80)) ;
-			console.log(ft_m_to_pix(80));
-			console.log($_parent.find('[name="height"]').val());
+			_canvas.height 	= Math.round(parseFloat($_parent.find('[name="height"]').val())*m_to_pix +  ft_m_to_pix(80)) ;
+			_canvas.width 	= Math.round(parseFloat($_parent.find('[name="width"]').val())*m_to_pix +  ft_m_to_pix(80)) ;
+			console.log(parseFloat($_parent.find('[name="height"]').val())*m_to_pix );
 			square_rate = _canvas.height / _canvas.width ;
 			update_canvas();
 			fix_rate() ;
@@ -154,8 +153,8 @@
 			//console.log(_canvas);
 			draw_distance({x:45,y:25},{x:arrow_canvas.width-45,y:25});
 			draw_distance({x:25,y:45},{x:25,y:arrow_canvas.height-45});
-			draw_width_value(_canvas.width);
-			draw_height_value(_canvas.height);			
+			draw_width_value(parseFloat(_canvas.width));
+			draw_height_value(parseFloat(_canvas.height));
 		}
 		$('a#zoom_in').click(function(e){
 			e.preventDefault();

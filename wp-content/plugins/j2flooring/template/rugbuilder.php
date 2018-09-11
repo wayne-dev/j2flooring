@@ -17,7 +17,7 @@
 </head>
 <body id = "rugbuilder">
 <?php
-		$img = wp_get_attachment_image_src( 84, 'thumbnail' ) ;
+		$img = wp_get_attachment_image_src( 84, 'full' ) ;
 		$logo_url =$img[0];
 ?>
 	<div class="container">

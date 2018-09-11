@@ -56,7 +56,7 @@
 			}
 			//_temp_background = src;
 			$(_this).html(_canvas);
-			//$('#images_canvas canvas').css({'height':  canvas_width*_scale+'px' , 'width': canvas_height*_scale+'px'});
+			$('#images_canvas canvas').css({'height':  canvas_height*_scale+'px' , 'width': canvas_width*_scale+'px'});
 		}
 		function set_border(src){
 			var _image = new Image();
@@ -108,7 +108,6 @@
 				_canvas.border = src ;
 			}
 			$(_this).html(_canvas);
-			$('#images_canvas canvas').css({'height':  canvas_height*_scale+'px' , 'width': canvas_width*_scale+'px'});
 			//_temp_border = src;
 		}
 		function update_canvas(){

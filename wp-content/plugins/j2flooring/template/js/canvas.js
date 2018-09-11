@@ -186,7 +186,7 @@
 			e.preventDefault();
 			if($('#images_canvas canvas').width() >= (_max_width * 0.4)){
 				_scale = parseFloat(_scale) - zoom_step;
-				if( _scale >= 0 ){
+				if( _scale > 0 ){
 					scale_img(_scale);
 				} else {
 					_scale = 1;

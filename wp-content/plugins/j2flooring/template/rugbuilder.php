@@ -90,10 +90,12 @@
 		<div class="review_main">
 			<div id="calculation_result">
 			</div>
-			<div class="arrow_canvas">
-				<canvas id = 'arrow_canvas'></canvas>
+			<div class="preview_product dragscroll">
+				<div class="arrow_canvas">
+					<canvas id = 'arrow_canvas'></canvas>
+				</div>
+				<div id="images_canvas"></div>
 			</div>
-			<div id="images_canvas" class="dragscroll"></div>
 			<div id = 'canvas_control' >
 				<a id = "zoom_in">+</a>
 				<a id = "zoom_out">-</a>

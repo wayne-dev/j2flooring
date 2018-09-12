@@ -24,9 +24,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				wp_register_script('rugbuilder',plugin_dir_url(__FILE__) .'/template/rugbuilder.js',array( 'jquery' ));
 				wp_register_script('canvas',plugin_dir_url(__FILE__) .'/template/js/canvas.js',array( 'jquery' ));
 				wp_register_script('rugbuilder-scrollbar',plugin_dir_url(__FILE__) .'/template/js/jquery.scrollbar.js',array( 'jquery' ));
+				wp_register_script('dragscroll',plugin_dir_url(__FILE__) .'/template/js/dragscroll.js',array( 'jquery' ));
 				wp_enqueue_script( 'rugbuilder' );
 				wp_enqueue_script( 'canvas' );
 				wp_enqueue_script( 'rugbuilder-scrollbar' );
+				wp_enqueue_script( 'dragscroll' );
 				
 				$global_var = array( 
 					"rugbuilder" => array(

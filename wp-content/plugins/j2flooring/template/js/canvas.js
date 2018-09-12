@@ -2,22 +2,28 @@
     "use strict";
 	$.fn.rugbuilder = function() {
 		var _canvas,_this, arrow_canvas, m_to_pix, canvas_width, _scale,
-		canvas_height,_max_height, _max_width, default_square_rate, _size_boder,zoom_step ,square_rate, _multi;
+		canvas_height,_max_height, _max_width, default_square_rate, _size_boder,zoom_step ,square_rate, _multi, _max_zoom_step, _min_scale;
 		var _canvas_border,ct_arrow_canvas ;
 		function init() {
 			
-			_multi = 3 // x3
+			_max_zoom_step = 4;
+			_multi = 4 // x4
 			m_to_pix = 100; // 1m - 1000px
 			square_rate = default_square_rate = 1;//square rate  = h / w
 			_max_width = $("html").width()*0.8 + 40 ;
 			_max_height = $("html").width() * square_rate*0.8 + 40;
 			_size_boder = 20;//_size_boder 20 px
 			zoom_step	= 1;
-			_scale = 1;
+			_scale = _min_scale = 1;
 			_canvas = document.createElement('canvas'),_canvas.id     = "canvas";
 			//canvas_width 	= canvas_width		=  _max_width * 0.6; // max canvas width = 0.6 screen (px)
-			canvas_width 	=  500 + 80; // max canvas width = 0.6 screen (px)
-			canvas_height 	=  500 * square_rate + 80;
+			if(_max_width < 500){
+				canvas_width    =  _max_width 
+				canvas_height 	=  _max_width * square_rate;
+			} else {
+				canvas_width 	=  500 + 80; // max canvas width = 0.6 screen (px)
+				canvas_height 	=  500 * square_rate + 80;
+			}
 			_canvas.width  = canvas_width*_multi;
 			_canvas.height = canvas_height*_multi;
 			_canvas.background = '';
@@ -33,6 +39,7 @@
 			
 			$('#parent_menu_size input[name="width"]').val((canvas_width  - ft_m_to_pix(80))/m_to_pix);
 			$('#parent_menu_size input[name="height"]').val((canvas_height - ft_m_to_pix(80))/m_to_pix);
+			$('div.preview_product').css({'height': canvas_height+15+'px' });
 			//draw_distance_info();
 			
 		}
@@ -56,7 +63,8 @@
 			}
 			//_temp_background = src;
 			$(_this).html(_canvas);
-			$('#images_canvas canvas').css({'height':  canvas_height*_scale+'px' , 'width': canvas_width*_scale+'px'});
+			$('#images_canvas canvas').css({'height':  canvas_height*_scale+'px' , 'width': canvas_width*_scale+'px' });
+			$('div.preview_product').css({'height': canvas_height+15+'px' });
 		}
 		function set_border(src){
 			var _image = new Image();
@@ -132,12 +140,14 @@
 			var scale = 1;
 			if(canvas_width > _max_width){
 				//scale = _max_width / canvas_width  ;
-				scale = _max_width / canvas_width  ;
+				_min_scale = scale = _max_width / canvas_width  ;
 			}
 			if(canvas_height > _max_height){
 				//scale = _max_height / canvas_height ;
-				scale = _max_height / canvas_height ;
+				_min_scale = scale = _max_height / canvas_height ;
 			}
+			_min_scale = scale;
+			_scale = scale;
 			update_distance_info();
 			scale_img(scale);
 		}
@@ -177,21 +187,27 @@
 		}
 		$('a#zoom_in').click(function(e){
 			e.preventDefault();
-			if($('#images_canvas canvas').width() <= (_max_width * 0.8)){
+			//if($('#images_canvas canvas').width() <= (_max_width * 0.8)){
 				_scale = parseFloat(_scale) + zoom_step;
-				 scale_img(_scale);
-			}
+				if( _scale <= _max_zoom_step ){
+					scale_img(_scale);
+				} else {
+					_scale = (_max_zoom_step - 1)+_min_scale;
+				}
+				console.log(_min_scale+'||'+_scale);
+			//}
 		});
 		$('a#zoom_out').click(function(e){
 			e.preventDefault();
-			if($('#images_canvas canvas').width() >= (_max_width * 0.4)){
+			//if($('#images_canvas canvas').width() >= (_max_width * 0.4)){
 				_scale = parseFloat(_scale) - zoom_step;
 				if( _scale > 0 ){
 					scale_img(_scale);
 				} else {
-					_scale = 1;
+					_scale = _min_scale;
 				}
-			}
+				console.log(_min_scale+'||'+_scale);
+			//}
 		});
 		function scale_img(scale){
 			$('#images_canvas canvas').css({'height':  canvas_height*scale+'px' , 'width': canvas_width*scale+'px'});

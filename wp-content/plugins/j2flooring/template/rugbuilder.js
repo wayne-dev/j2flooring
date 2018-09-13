@@ -8,7 +8,7 @@ jQuery(function($){
 	$(".subsub_menu_rug_wapper").after('<div style = "display:none" id = "loading_img"><img  src = "'+global_var.loading_img+'" /></div>');
 	$(document).on('click','.select_image_wapper .close',function(e){
 		$(_this).removeClass("active");
-		$(".select_image_wapper").html("");
+		$(".select_image_wapper").removeClass("open").html("");
 	});
 	$(document).on('click','.subsub_menu_rug ul li a',function(e){
 		$(".subsub_menu_rug ul li a").removeClass("active");
@@ -40,6 +40,7 @@ jQuery(function($){
 		});
 	});
 	$(document).on('click','.main_menu_rug ul li a',function(e){
+		$(".select_image_wapper").removeClass("open");
 		$(".main_menu_rug ul li a").removeClass("active");
 		$(".menu_rug_style ul li a").removeClass("active");
 		$(".select_image_wapper").html("").attr('id','select_' + $(this).data("cat_slug"));

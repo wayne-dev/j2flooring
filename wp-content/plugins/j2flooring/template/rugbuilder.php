@@ -96,10 +96,10 @@
 				</div>
 				<div id="images_canvas"></div>
 			</div>
-			<div id = 'canvas_control' >
+			<!-- <div id = 'canvas_control' >
 				<a id = "zoom_in">+</a>
 				<a id = "zoom_out">-</a>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </body>

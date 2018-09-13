@@ -123,16 +123,19 @@
 			//set_border(_canvas.border);
 			
 			//$(_this).html(_canvas);
+			rug_zoom();
 		}
 		$(document).on("click",".select_image_wapper#select_center .menu_rug_style ul li a",function(e){
 			global_var.rugbuilder.background = $(this).data('pattern_id');;
 			var $src = $(this).find('img').attr("src");
 			set_background($src);
+			rug_zoom();
 		});
 		$(document).on("click",".select_image_wapper#select_border .menu_rug_style ul li a",function(e){
 			global_var.rugbuilder.border = $(this).data('pattern_id');
 			var $src = $(this).find('img').attr("src");
 			set_border($src);
+			rug_zoom();
 		});
 		function fix_rate(){
 			//console.log(canvas_height + '-' + _max_height);
@@ -150,6 +153,11 @@
 			_scale = scale;
 			update_distance_info();
 			scale_img(scale);
+		}
+		function rug_zoom(){
+			setTimeout(function(){
+				$('#images_canvas').zoom({url: _canvas.toDataURL('image/jpeg', 0.4)});
+			}, 500);
 		}
 		$(document).on('change', '#parent_menu_size input', function(e){
 			var $_parent = $(this).closest('#parent_menu_size');
@@ -218,7 +226,8 @@
 			text -= ft_m_to_pix(80);
 			text += " cm";
 			//var ctx = arrow_canvas.getContext("2d");
-			ct_arrow_canvas.font = "10px Open Sans";
+			var _font_size = 10*(1/_scale);
+			ct_arrow_canvas.font = _font_size+"px Open Sans";
 			ct_arrow_canvas.fillText(text,(arrow_canvas.width / 2)-20,20);
 		}
 		function draw_height_value(text){
@@ -228,9 +237,10 @@
 			ct_arrow_canvas.save();
 			ct_arrow_canvas.translate( 20, 20);
 			ct_arrow_canvas.rotate(-Math.PI/2);
-			ct_arrow_canvas.font = "10px Open Sans";
+			var _font_size = 10*(1/_scale);
+			ct_arrow_canvas.font = 10*(1/_scale)+"px Open Sans";
 			ct_arrow_canvas.textAlign = "center";
-			ct_arrow_canvas.fillText(text, (-0.5 * arrow_canvas.height ) +20, -5);
+			ct_arrow_canvas.fillText(text, (-0.5 * arrow_canvas.height ) +20, 0);
 			ct_arrow_canvas.restore();
 		}
 

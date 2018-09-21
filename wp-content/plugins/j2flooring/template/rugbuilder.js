@@ -55,6 +55,7 @@ jQuery(function($){
 		$('#calculation_result').hide();
 	});
 	$(document).on("click","a.apply-size",function(e){
+		var _this = this ;
 		e.preventDefault();
 		global_var.rugbuilder.width = $(".size-width").val();
 		global_var.rugbuilder.height = $(".size-height").val();
@@ -63,6 +64,26 @@ jQuery(function($){
 			"action" : "calculation_price",
 			"rugbuilder" : rugbuilder
 		} ;
+		if(!rugbuilder.background) {
+			$('a[data-cat_slug=center]').addClass('_warning');
+			$(_this).after("<span>Center is required</span>");
+			setTimeout(function(){
+				$('a[data-cat_slug=center]').removeClass('_warning');
+				$(_this).parent().find('span').remove();
+			},1000);
+			$('a[data-cat_slug=center]').click();
+			return false;
+		}
+		if(!rugbuilder.border) {
+			$('a[data-cat_slug=border]').addClass('_warning');
+			$(_this).after("<span>Border is required</span>");
+			setTimeout(function(){
+				$('a[data-cat_slug=border]').removeClass('_warning');
+				$(_this).parent().find('span').remove();
+			},1000);
+			$('a[data-cat_slug=border]').click();
+			return false;
+		}
 		if(rugbuilder.border && rugbuilder.background){
 		$("#loading_img").show();
 			$.post(global_var.ajax_url,data,function(response){
@@ -70,12 +91,6 @@ jQuery(function($){
 				$('#calculation_result').html(response).show();
 				$("#loading_img").hide();
 			});
-		}
-		if(!rugbuilder.border) {
-			$('a[data-cat_slug=border]').click();
-		}
-		if(!rugbuilder.background) {
-			$('a[data-cat_slug=center]').click();
 		}
 	});
 	$(document).on("click","a#rugbuilder_add_to_cart",function(e){

@@ -45,7 +45,7 @@
 				}
 				
 				?>
-					<li id = 'menu_size'><a data-cat_slug = 'size'href = '' data-cat_id = 'menu_size'>Size</a></li>
+				<!--	<li id = 'menu_size'><a data-cat_slug = 'size'href = '' data-cat_id = 'menu_size'>Size</a></li>-->
 				</ul>
 			</div>
 			<div class = 'select_image_wapper'>
@@ -78,8 +78,8 @@
 					<?php } ?>
 				<div class = 'sub_menu_rug menu_rug_style' id = 'parent_menu_size'>
 					<div class = 'calculate_form'>
-							<p><b>Height (m): </b><input type="number" class="form-control size-height" max="1000" min="0" step="0.1" name="height" value=""  /></p>
-							<p><b>Witdh (m): </b><input type="number" class="form-control size-width" max="1000" min="0" step="0.1" name="width" value="" /></p>
+							<p><b>Height (m): </b><input type="number" class="form-control size-height" max="5" min="0" step="0.1" name="height" value=""  /></p>
+							<p><b>Witdh (m): </b><input type="number" class="form-control size-width" max="5" min="0" step="0.1" name="width" value="" /></p>
 							<p><a href="javascript:void(0);" class="apply-size">Calculate price</a>
 					</div>
 				</div>
@@ -88,6 +88,11 @@
 			</div>
 		</div>
 		<div class="review_main">
+					<div class = 'calculate_form'>
+						<p><b>Height (m): </b><input type="number" class="form-control size-height" max="5" min="0" step="0.1" name="height" value=""  /></p>
+						<p><b>Witdh (m): </b><input type="number" class="form-control size-width" max="5" min="0" step="0.1" name="width" value="" /></p>
+						<p><a href="javascript:void(0);" class="apply-size">Calculate price</a>
+					</div>
 			<div id="calculation_result">
 			</div>
 			<div class="preview_product dragscroll">

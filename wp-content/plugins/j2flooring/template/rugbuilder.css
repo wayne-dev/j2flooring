@@ -43,11 +43,22 @@ a:focus {
     text-align: center;
     text-transform: uppercase;
     color: #c39873;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
 }
 .main_menu_rug ul li a.active {
     border-bottom: 2px solid #c39873;
 }
-
+.main_menu_rug ul li a._warning{
+    color: red;
+    border-color: red;
+	-webkit-transition: all 0s ease-in-out;
+	-moz-transition: all 0s ease-in-out;
+	-o-transition: all 0s ease-in-out;
+	transition: all 0s ease-in-out;
+}
 .main_menu_rug ul li a:hover {
     color: #885428;
 }
@@ -192,7 +203,7 @@ div#canvas_control {
 
 .review_main {
     position: relative;
-    margin-top: 100px;
+    margin-top: 10px;
 }
 
 a#zoom_in {}
@@ -210,9 +221,10 @@ div#canvas_control > a {
     background: #fff;
 }
 .calculate_form {
-    /* width: 200px; */
+    width: 400px;
     margin: auto;
     padding: 20px 0;
+    text-align: center;
 }
 .calculate_form b {
     font-size: 15px;
@@ -222,7 +234,7 @@ div#canvas_control > a {
     font-size: 15px;
     padding: 5px;
     text-align: center;
-    width: 120px;
+    width: 80px;
     margin: auto;
 }
 
@@ -239,14 +251,18 @@ div#canvas_control > a {
     font-size: 14px;
     border-radius: 4px;
 }
-
+.calculate_form a + span {
+    clear: both;
+    display: block;
+    color: red;
+}
 .calculate_form a:hover {
     background: #333;
 }
 div#calculation_result {
     position: absolute;
     left: 0;
-    top: -80px;
+    top: 100px;
     width: 100%;
     text-align: center;
 }

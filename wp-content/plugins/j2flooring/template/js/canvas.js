@@ -7,22 +7,23 @@
 		function init() {
 			
 			_max_zoom_step = 4;
-			_multi = 4 // x4
+			_multi = 4 ,// x4
 			m_to_pix = 100; // 1m - 1000px
 			square_rate = default_square_rate = 1;//square rate  = h / w
-			_max_width = $("html").width()*0.8 + 40 ;
-			_max_height = $("html").width() * square_rate*0.8 + 40;
+			_max_width =  Math.round($("html").width()*0.8 + 40) ;
+			_max_height =  Math.round($("html").width() * square_rate*0.8 + 40);
 			_size_boder = 20;//_size_boder 20 px
 			zoom_step	= 1;
 			_scale = _min_scale = 1;
 			_canvas = document.createElement('canvas'),_canvas.id     = "canvas";
 			//canvas_width 	= canvas_width		=  _max_width * 0.6; // max canvas width = 0.6 screen (px)
+			
 			if(_max_width < 500){
 				canvas_width    =  _max_width 
 				canvas_height 	=  _max_width * square_rate;
 			} else {
 				canvas_width 	=  500 + 80; // max canvas width = 0.6 screen (px)
-				canvas_height 	=  500 * square_rate + 80;
+				canvas_height 	=  300 * square_rate + 80;
 			}
 			_canvas.width  = canvas_width*_multi;
 			_canvas.height = canvas_height*_multi;
@@ -37,8 +38,8 @@
 			//_canvas.border= 'http://localhost/icon2.jpg';
 			//set_background("http://localhost/icon.png");
 			
-			$('#parent_menu_size input[name="width"]').val((canvas_width  - ft_m_to_pix(80))/m_to_pix);
-			$('#parent_menu_size input[name="height"]').val((canvas_height - ft_m_to_pix(80))/m_to_pix);
+			$('input[name="width"]').val((canvas_width  - ft_m_to_pix(80))/m_to_pix);
+			$('input[name="height"]').val((canvas_height - ft_m_to_pix(80))/m_to_pix);
 			$('div.preview_product').css({'height': canvas_height+15+'px' });
 			//draw_distance_info();
 			
@@ -159,11 +160,20 @@
 				$('#images_canvas').zoom({url: _canvas.toDataURL('image/jpeg', 0.4)});
 			}, 500);
 		}
-		$(document).on('change', '#parent_menu_size input', function(e){
-			var $_parent = $(this).closest('#parent_menu_size');
+		$(document).on('keyup', '.calculate_form input', function(e){
+			var max_input = $(this).attr('max'),val = $(this).val();
+			if(parseFloat(max_input) < parseFloat(val)){
+				$(this).val(max_input);
+				return false;
+			}
+		});
+		$(document).on('change', '.calculate_form input', function(e){
+			//var $_parent = $(this).closest('#parent_menu_size');
+			$('#calculation_result').hide();
+			var $_parent = $(this).closest('.calculate_form');
 			canvas_height 	= Math.round(parseFloat($_parent.find('[name="height"]').val())*m_to_pix +  ft_m_to_pix(80) );
 			canvas_width 	= Math.round(parseFloat($_parent.find('[name="width"]').val())*m_to_pix +  ft_m_to_pix(80)) ;
-			console.log(parseFloat($_parent.find('[name="height"]').val())*m_to_pix );
+
 			square_rate = canvas_height / canvas_width ;
 			//update size, square_rate
 			_canvas.height = canvas_height*_multi;
@@ -188,6 +198,7 @@
 		}
 		function draw_distance_info(){
 			//console.log(_canvas);
+			update_distance_info();
 			draw_distance({x:45,y:25},{x:arrow_canvas.width-45,y:25});
 			draw_distance({x:25,y:45},{x:25,y:arrow_canvas.height-45});
 			draw_width_value(parseFloat(canvas_width));

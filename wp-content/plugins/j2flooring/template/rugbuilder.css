@@ -223,8 +223,9 @@ div#canvas_control > a {
 .calculate_form {
     width: 400px;
     margin: auto;
-    padding: 20px 0;
+    padding: 20px 0 0;
     text-align: center;
+    height: 200px;
 }
 .calculate_form b {
     font-size: 15px;

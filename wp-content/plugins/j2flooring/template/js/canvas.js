@@ -61,6 +61,7 @@
 				if(_canvas.border)
 					set_border(_canvas.border);
 				draw_distance_info();
+				__zoom();
 			}
 			//_temp_background = src;
 			$(_this).html(_canvas);
@@ -115,6 +116,7 @@
 				_draw.rotate(90 * Math.PI / 180);
 				_draw.translate(0, -(_canvas.width + (_canvas.height - _canvas.width)));
 				_canvas.border = src ;
+				__zoom();
 			}
 			$(_this).html(_canvas);
 			//_temp_border = src;
@@ -157,8 +159,11 @@
 		}
 		function rug_zoom(){
 			setTimeout(function(){
-				$('#images_canvas').zoom({url: _canvas.toDataURL('image/jpeg', 0.4)});
+				//$('#images_canvas').zoom({url: _canvas.toDataURL('image/jpeg', 0.4)});
 			}, 500);
+		}
+		function __zoom(){
+			$('#images_canvas').zoom({url: _canvas.toDataURL('image/jpeg', 0.4)});
 		}
 		$(document).on('keyup', '.calculate_form input', function(e){
 			var max_input = $(this).attr('max'),val = $(this).val();

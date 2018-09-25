@@ -22,15 +22,15 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		    if ( get_query_var( 'rugbuilder' ) ) {
 
 				wp_register_script('rugbuilder',plugin_dir_url(__FILE__) .'/template/rugbuilder.js',array( 'jquery' ));
-				wp_register_script('canvas',plugin_dir_url(__FILE__) .'/template/js/canvas.js',array( 'jquery' ));
 				wp_register_script('rugbuilder-scrollbar',plugin_dir_url(__FILE__) .'/template/js/jquery.scrollbar.js',array( 'jquery' ));
 				wp_register_script('rugbuilder-zoom',plugin_dir_url(__FILE__) .'/template/js/jquery.zoom.min.js',array( 'jquery' ));
 				
 				wp_enqueue_script( 'rugbuilder' );
-				wp_enqueue_script( 'canvas' );
 				wp_enqueue_script( 'rugbuilder-scrollbar' );
 				wp_enqueue_script( 'rugbuilder-zoom' );
-				
+
+				wp_register_script('canvas',plugin_dir_url(__FILE__) .'/template/js/canvas.js',array( 'jquery' ));
+				wp_enqueue_script( 'canvas' );
 				
 				$global_var = array( 
 					"rugbuilder" => array(
@@ -43,9 +43,21 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					"loading_img" => plugin_dir_url(__FILE__) . "/assets/img/ajax-loader.gif"
 				);
 				wp_localize_script('rugbuilder','global_var',$global_var);
-				}
+			} else {
+				wp_register_script('canvas-thumbnail',plugin_dir_url(__FILE__) .'assets/canvas_mini_thumbnail.js',array( 'jquery' ));
+				wp_enqueue_script( 'canvas-thumbnail' );
+			}
 	}
 	add_action( 'wp_enqueue_scripts', 'rugbuilder_scripts',0,100 );
+
+	function admin_rugbuilder_scripts(){
+		wp_register_script('canvas-thumbnail',plugin_dir_url(__FILE__) .'assets/canvas_mini_thumbnail.js',array( 'jquery' ));
+		wp_enqueue_script( 'canvas-thumbnail' );
+
+		wp_register_style( 'canvas-style', plugin_dir_url(__FILE__) . 'assets/admin-style.css', false, '1.0.0' );
+        wp_enqueue_style( 'canvas-style' );
+	}
+	add_action( 'admin_enqueue_scripts', 'admin_rugbuilder_scripts' );
 
 	require_once("taxonomy-images/taxonomy-images.php");
 	global $img_taxes;
@@ -61,6 +73,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	require_once("inc/taxonomy.php");
 	require_once("inc/metaboxes.php");
 	require_once("inc/ajax.php");
+	require_once("inc/woocommerce.php");
 }  
 
 ?>

@@ -1,0 +1,8 @@
+.canvas.wc-order-item-thumbnail{
+    width: 200px !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+.canvas.wc-order-item-thumbnail:before{
+    display: none !important;
+}

@@ -34,6 +34,7 @@ if(!function_exists('update_add_values_to_order_item_meta'))
 add_action( 'wp_ajax_rugbuilder_add_to_cart', 'rugbuilder_add_to_cart' );
 add_action( 'wp_ajax_nopriv_rugbuilder_add_to_cart', 'rugbuilder_add_to_cart' );
 function rugbuilder_add_to_cart() {
+	global $img_taxes;
 	$product_obj = get_page_by_path( "rug-builder", OBJECT, 'product' );
 
 	$rugbuilder = $_POST['rugbuilder'] ;
@@ -49,6 +50,10 @@ function rugbuilder_add_to_cart() {
 	$cart_item_meta["rugbuilder"]["bg_area"] =  $bg_area;
 	$cart_item_meta["rugbuilder"]["cir"] =  $cir;
 	$cart_item_meta["rugbuilder"]["price"] =  $rugbuilder_price;
+	$cart_item_meta["rugbuilder"]["bg_url"] =  wp_get_attachment_image_src( get_post_meta( $rugbuilder['background'],"_pattern_id", true ), 'full' );
+	$cart_item_meta["rugbuilder"]["border_url"] = wp_get_attachment_image_src( get_post_meta( $rugbuilder['border'],"_pattern_id", true ), 'full' );
+	$cart_item_meta["rugbuilder"]["height"] =  $rugbuilder['height'];
+	$cart_item_meta["rugbuilder"]["width"] =  $rugbuilder['width'];
 
 	//WC()->cart->remove_cart_item($item_key);	
 	wc_empty_cart();

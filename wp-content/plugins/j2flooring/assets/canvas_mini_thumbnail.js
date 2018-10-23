@@ -10,13 +10,13 @@
             canvas_width = 200;
             _canvas = document.createElement('canvas'),
             _canvas.id = "canvas";
-            _canvas.style.maxWidth = "100%";
+            //_canvas.style.maxWidth = "100%";
             _canvas.width  = Math.round(parseFloat(_this.attr('data-width'))*m_to_pix +  ft_m_to_pix(80) )*_multi;
 			_canvas.height = Math.round(parseFloat(_this.attr('data-height'))*m_to_pix +  ft_m_to_pix(80) )*_multi;
             _canvas.background = _this.attr('data-bg');
             _canvas.border = _this.attr('data-border');
             set_background(_canvas.background);
-            set_border(_canvas.border);
+            
         }
 
         function ft_m_to_pix (x){
@@ -33,6 +33,7 @@
 				var _moveto = 40*_multi;
 				_draw.fillRect(_moveto, _moveto, _canvas.width - 80*_multi, _canvas.height - 80*_multi);
                 _canvas.background = src ;
+				set_border(_canvas.border);
 			}
             $(_this).html(_canvas);
         }

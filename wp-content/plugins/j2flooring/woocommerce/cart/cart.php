@@ -166,6 +166,9 @@ do_action( 'woocommerce_before_cart' ); ?>
 	?>
 </div>
 <style>
+.woocommerce-cart-form td.product-name {
+    min-width: 240px;
+}
 canvas {max-width:150px;}
 </style>
 <?php do_action( 'woocommerce_after_cart' ); ?>

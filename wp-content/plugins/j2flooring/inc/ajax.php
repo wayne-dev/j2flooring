@@ -15,22 +15,6 @@ function update_custom_price( $cart_object ) {
     }
 	return $cart_object ;
 }
-/*
-add_action('woocommerce_add_order_item_meta','update_add_values_to_order_item_meta',1,2);
-if(!function_exists('update_add_values_to_order_item_meta'))
-{
-  function update_add_values_to_order_item_meta($item_id, $values)
-  {
-        global $woocommerce,$wpdb;
- 		$addon_name = $values["lense_addon"]["value"];
-		$addon_price = $values["lense_addon"]["price"];
-        if(!empty($addon_name))
-        {
-            wc_update_order_item_meta($item_id,$addon_name,$addon_price);  
-        }
-  }
-}
-*/
 add_action( 'wp_ajax_rugbuilder_add_to_cart', 'rugbuilder_add_to_cart' );
 add_action( 'wp_ajax_nopriv_rugbuilder_add_to_cart', 'rugbuilder_add_to_cart' );
 function rugbuilder_add_to_cart() {
@@ -54,6 +38,8 @@ function rugbuilder_add_to_cart() {
 	$cart_item_meta["rugbuilder"]["border_url"] = wp_get_attachment_image_src( get_post_meta( $rugbuilder['border'],"_pattern_id", true ), 'full' );
 	$cart_item_meta["rugbuilder"]["height"] =  $rugbuilder['height'];
 	$cart_item_meta["rugbuilder"]["width"] =  $rugbuilder['width'];
+	$cart_item_meta["rugbuilder"]["background_id"] =  $rugbuilder['background'];
+	$cart_item_meta["rugbuilder"]["border_id"] =  $rugbuilder['border'];
 
 	//WC()->cart->remove_cart_item($item_key);	
 	wc_empty_cart();
